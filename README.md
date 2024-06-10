@@ -2,27 +2,26 @@
 
 ## Enunciado do Cenário
 
-Imagine que você está planejando alugar um carro para uma viagem. Para facilitar esse processo, uma empresa de locação de carros desenvolveu um sistema com diferentes comportamentos, dependendo das circunstâncias da locação e do cliente.
+Você é um cliente de um banco e precisa sacar dinheiro de um caixa eletrônico. Para facilitar essa operação, o sistema do banco foi desenvolvido com diferentes comportamentos, dependendo do tipo de cliente e do saldo em sua conta.
 
-Inicialmente, considere um cliente que deseja alugar um carro de luxo. Se esse cliente realizar a reserva com antecedência de pelo menos uma semana, o sistema deve oferecer um desconto especial no valor total da locação. Por outro lado, suponha um cliente que necessita alugar um carro utilitário de última hora, sem qualquer reserva prévia. Nesse caso, o sistema deve ainda conseguir encontrar um veículo disponível e processar a locação rapidamente, mesmo que isso implique em um custo um pouco mais elevado devido à demanda urgente.
+Primeiramente, considere um cliente especial com um saldo negativo de -200 reais. Se esse cliente solicitar um saque de 100 reais, o sistema deve permitir o saque e atualizar o saldo da conta para -300 reais.
 
-Esses cenários exemplificam como o sistema de locação de carros responde às diferentes necessidades e condições dos clientes, adaptando-se para garantir uma experiência satisfatória de locação, seja para reservas antecipadas ou demandas de última hora.
+Por outro lado, suponha um cliente comum que também possui um saldo negativo, mas de -300 reais. Se esse cliente tentar sacar 200 reais, o sistema não deve permitir o saque e deve retornar a mensagem "Saldo Insuficiente".
+
+Esses cenários ilustram como o sistema do caixa eletrônico responde às solicitações de saque, levando em consideração o tipo de cliente e o saldo disponível em sua conta.
 
 ## Gherkin do Cenário
 
 ```gherkin
-Feature: Sistema de Locação de Carros
+Story: Cliente faz saque de dinheiro
+  Como um cliente, eu gostaria de sacar dinheiro em caixa eletrônico, para que eu não tenha que esperar numa fila de banco.
 
-  Scenario: Cliente reserva carro de luxo com antecedência
-    Given que o cliente deseja alugar um carro de luxo
-    And que o cliente realiza a reserva com pelo menos uma semana de antecedência
-    When o cliente confirma a reserva
-    Then o sistema deve oferecer um desconto especial no valor total da locação
+Scenario: Cliente especial com saldo negativo
+  Given um cliente especial com saldo atual de -200 reais
+  When for solicitado um saque no valor de 100 reais
+  Then deve efetuar o saque e atualizar o saldo da conta para -300 reais
 
-  Scenario: Cliente aluga carro utilitário de última hora
-    Given que o cliente deseja alugar um carro utilitário
-    And que o cliente não realizou reserva prévia
-    When o cliente solicita a locação do carro
-    Then o sistema deve encontrar um veículo disponível
-    And o sistema deve processar a locação rapidamente
-    And o sistema deve aplicar um custo adicional devido à demanda urgente
+Scenario: Cliente comum com saldo negativo
+  Given um cliente comum com saldo atual de -300 reais
+  When solicitar um saque de 200 reais
+  Then não deve efetuar o saque e deve retornar a mensagem "Saldo Insuficiente"
