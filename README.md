@@ -1,4 +1,4 @@
-# AF_BDD_JESER_224044
+# AF_BDD_ETAPA2_JESER_224044
 
 ## Enunciado do Cenário
 
